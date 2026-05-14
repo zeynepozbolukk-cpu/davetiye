@@ -8,132 +8,197 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
 body{
   font-family:Inter,sans-serif;
   background:#f5f3f1;
-  color:#1d1d1d;
   overflow-x:hidden;
+  color:#1d1d1d;
 }
+
+/* GRAIN */
+
 body::after{
   content:"";
   position:fixed;
   inset:0;
-  background:url("https://www.transparenttextures.com/patterns/paper-fibers.png");
-  opacity:.13;
+  background-image:url("https://www.transparenttextures.com/patterns/paper-fibers.png");
+  opacity:.12;
   pointer-events:none;
-  z-index:20;
+  z-index:100;
 }
 
 /* INTRO */
+
 .intro{
   min-height:100vh;
   display:flex;
   align-items:center;
   justify-content:center;
   padding:22px;
-  background:#f5f3f1;
-  transition:1.4s ease;
+  background:
+    radial-gradient(circle at top,#ffffff 0%,#f5f3f1 55%,#ebe7e2 100%);
+  transition:1.5s ease;
 }
+
 .intro.hide{
   opacity:0;
-  transform:scale(1.06);
+  transform:scale(1.05);
   filter:blur(18px);
   pointer-events:none;
 }
+
+/* ENVELOPE */
+
 .envelope{
-  width:min(86vw,330px);
-  height:600px;
-  background:#faf8f5;
-  border:1px solid #e5dcd3;
+  width:min(88vw,430px);
+  height:min(92vh,760px);
+  background:#fbfaf7;
+  border:1px solid #ddd5cb;
   position:relative;
   overflow:hidden;
   cursor:pointer;
-  box-shadow:0 28px 80px rgba(0,0,0,.12);
+
+  box-shadow:
+    0 30px 90px rgba(0,0,0,.12),
+    0 8px 20px rgba(0,0,0,.06);
 }
+
 .envelope::before{
   content:"";
   position:absolute;
   inset:18px;
-  border:1px solid #e5dcd3;
-  z-index:5;
+  border:1px solid #e3dad0;
+  z-index:4;
 }
+
 .flap{
   position:absolute;
   top:0;
   left:0;
   width:100%;
-  height:138px;
-  background:#f8f5f1;
-  border-bottom:1px solid #e5dcd3;
-  transform-origin:top;
-  transition:1.35s cubic-bezier(.22,1,.36,1);
+  height:84px;
+  background:#fbfaf7;
+  border-bottom:1px solid #e3dad0;
   z-index:10;
+  transform-origin:top;
+  transition:1.3s cubic-bezier(.22,1,.36,1);
 }
+
 .flap::after{
   content:"";
-  width:88px;
-  height:88px;
-  border-radius:50%;
-  background:#f8f5f1;
-  border:1px solid #e5dcd3;
   position:absolute;
   left:50%;
-  bottom:-44px;
+  bottom:-42px;
   transform:translateX(-50%);
+  width:84px;
+  height:84px;
+  border-radius:50%;
+  background:#fbfaf7;
+  border:1px solid #e3dad0;
+  border-top:none;
 }
-.envelope.open .flap{transform:rotateX(-145deg)}
+
+.envelope.open .flap{
+  transform:rotateX(-145deg);
+}
+
+/* CONTENT */
+
 .env-content{
   height:100%;
   display:flex;
   flex-direction:column;
   align-items:center;
   justify-content:flex-start;
-  padding-top:34px;
-  position:relative;
-  z-index:15;
+  padding-top:175px;
   text-align:center;
+  position:relative;
+  z-index:20;
 }
+
 .date-big{
   font-family:"Cormorant Garamond",serif;
-  font-size:76px;
-  line-height:.85;
+  font-size:94px;
+  line-height:.78;
+  letter-spacing:-.05em;
 }
+
 .dot{
-  margin:12px 0;
+  margin:24px 0;
   color:#b89b67;
+  font-size:14px;
 }
+
 .invite-word{
-  margin-top:30px;
-  font-size:12px;
-  letter-spacing:.43em;
+  margin-top:48px;
+  font-size:14px;
+  letter-spacing:.45em;
 }
+
 .heart{
-  margin-top:28px;
-  font-size:22px;
+  margin-top:52px;
+  font-size:26px;
 }
+
 .tap{
-  margin-top:88px;
-  font-size:11px;
+  margin-top:118px;
+  font-size:13px;
   line-height:2;
-  letter-spacing:.43em;
+  letter-spacing:.42em;
 }
+
 .arrow{
-  margin-top:22px;
-  color:#b89b67;
-  animation:bounce 2s infinite;
+  margin-top:36px;
+  width:44px;
+  height:44px;
+  position:relative;
+}
+
+.arrow::before,
+.arrow::after{
+  content:"";
+  position:absolute;
+  width:30px;
+  height:1px;
+  background:#b89b67;
+  top:20px;
+}
+
+.arrow::before{
+  left:0;
+  transform:rotate(45deg);
+}
+
+.arrow::after{
+  right:0;
+  transform:rotate(-45deg);
 }
 
 /* SITE */
+
 .site{
   display:none;
   opacity:0;
-  animation:siteIn 1.5s ease forwards;
+  animation:siteIn 1.6s ease forwards;
 }
-.site.show{display:block}
+
+.site.show{
+  display:block;
+}
 
 /* HERO */
+
 .hero{
   min-height:100vh;
   position:relative;
@@ -144,144 +209,182 @@ body::after{
   color:white;
   overflow:hidden;
 }
+
 .hero-bg{
   position:absolute;
   inset:0;
+
   background-image:
-    linear-gradient(
-      rgba(0,0,0,.42),
-      rgba(0,0,0,.44)
-    ),
+    linear-gradient(rgba(0,0,0,.45),rgba(0,0,0,.48)),
     url("./hero.jpg");
+
   background-size:cover;
   background-position:center;
-  transform:scale(1.04);
   animation:slowZoom 18s ease-in-out infinite alternate;
+  transform:scale(1.04);
 }
+
 .hero::after{
   content:"";
   position:absolute;
   inset:0;
   background:
-    radial-gradient(circle at center,rgba(0,0,0,.08),rgba(0,0,0,.58)),
-    linear-gradient(to bottom,rgba(0,0,0,.08),rgba(0,0,0,.45));
-  z-index:1;
+    radial-gradient(circle at center,transparent 10%,rgba(0,0,0,.5));
 }
+
 .hero-content{
   position:relative;
-  z-index:3;
-  padding:0 24px;
-  margin-top:20px;
+  z-index:5;
+  padding:0 20px;
 }
+
 .hero h1{
   font-family:"Cormorant Garamond",serif;
   font-style:italic;
   font-weight:400;
-  font-size:clamp(60px,12vw,118px);
-  line-height:1.05;
-  text-shadow:0 5px 28px rgba(0,0,0,.42);
-}
-.hero p{
-  max-width:720px;
-  margin:34px auto 0;
-  font-size:clamp(16px,3.8vw,22px);
-  line-height:2;
-  text-shadow:0 3px 18px rgba(0,0,0,.55);
-}
-.hero-date{
-  margin-top:36px;
-  letter-spacing:.48em;
-  font-size:13px;
-  opacity:.95;
+  font-size:clamp(48px,7vw,120px);
+  white-space:nowrap;
+  text-shadow:0 4px 24px rgba(0,0,0,.35);
 }
 
-/* PARTICLES */
+.hero p{
+  margin-top:34px;
+  font-size:clamp(16px,2vw,22px);
+  line-height:2;
+  max-width:720px;
+}
+
+.hero-date{
+  margin-top:34px;
+  letter-spacing:.5em;
+  font-size:12px;
+}
+
+/* DUST */
+
 .dust{
   position:absolute;
   inset:0;
-  z-index:2;
-  pointer-events:none;
+  z-index:3;
 }
+
 .dust span{
   position:absolute;
-  width:3px;
-  height:3px;
+  width:2px;
+  height:2px;
   border-radius:50%;
-  background:#d7b36a;
+  background:#d8b97a;
   opacity:.45;
   animation:float 8s linear infinite;
 }
 
-/* SECTIONS */
-section{padding:95px 22px}
-.container{max-width:1120px;margin:auto}
+/* GENERAL */
+
+section{
+  padding:100px 22px;
+}
+
+.container{
+  max-width:1120px;
+  margin:auto;
+}
+
 .section-title{
   text-align:center;
-  letter-spacing:.42em;
-  color:#b89b67;
-  font-size:12px;
   margin-bottom:60px;
+  font-size:12px;
+  letter-spacing:.45em;
+  color:#b89b67;
 }
-.grid-2,.grid-3{display:grid;gap:26px}
-.grid-2{grid-template-columns:repeat(2,1fr)}
-.grid-3{grid-template-columns:repeat(3,1fr)}
+
+.grid-2,
+.grid-3{
+  display:grid;
+  gap:26px;
+}
+
+.grid-2{
+  grid-template-columns:repeat(2,1fr);
+}
+
+.grid-3{
+  grid-template-columns:repeat(3,1fr);
+}
+
 .card{
-  background:rgba(255,255,255,.58);
-  border:1px solid #e7ded4;
-  padding:44px 28px;
+  background:rgba(255,255,255,.55);
+  border:1px solid #e5ddd3;
+  padding:44px 30px;
   text-align:center;
-  box-shadow:0 20px 60px rgba(0,0,0,.06);
+
+  box-shadow:
+    0 20px 60px rgba(0,0,0,.06);
 }
-.card h2,.card h3{
+
+.card h2,
+.card h3{
   font-family:"Cormorant Garamond",serif;
-  font-size:40px;
+  font-size:42px;
   font-weight:400;
-  margin-bottom:28px;
+  margin-bottom:30px;
 }
+
 .card p{
   line-height:2;
 }
+
 .label{
-  letter-spacing:.35em;
   font-size:11px;
+  letter-spacing:.35em;
   color:#b89b67;
-  margin-bottom:8px;
+  margin-bottom:10px;
 }
-.event p{margin-bottom:22px}
-.map-btn,.share-btn{
+
+.event p{
+  margin-bottom:22px;
+}
+
+.map-btn{
   display:inline-block;
-  margin-top:14px;
-  padding:13px 20px;
+  margin-top:16px;
   border:1px solid #1d1d1d;
   color:#1d1d1d;
   text-decoration:none;
+  padding:13px 20px;
   font-size:11px;
   letter-spacing:.22em;
 }
+
+/* COUNTDOWN */
+
 .countdown{
   display:grid;
   grid-template-columns:repeat(4,1fr);
   gap:16px;
   margin-top:45px;
 }
+
 .count-box{
-  border:1px solid #e7ded4;
-  background:rgba(255,255,255,.58);
+  border:1px solid #e5ddd3;
+  background:rgba(255,255,255,.55);
   padding:28px 8px;
   text-align:center;
 }
+
 .count-box strong{
   display:block;
   font-family:"Cormorant Garamond",serif;
-  font-size:48px;
+  font-size:50px;
   font-weight:400;
 }
+
 .count-box span{
   font-size:11px;
   letter-spacing:.28em;
 }
 
 /* MUSIC */
+
 .music-btn{
   position:fixed;
   right:18px;
@@ -289,75 +392,122 @@ section{padding:95px 22px}
   width:58px;
   height:58px;
   border-radius:50%;
-  border:1px solid #d7c6a5;
+  border:1px solid #d9c8a8;
   background:rgba(255,255,255,.82);
   backdrop-filter:blur(12px);
   color:#b89b67;
   font-size:20px;
-  z-index:100;
   cursor:pointer;
-  box-shadow:0 12px 35px rgba(0,0,0,.18);
+  z-index:200;
 }
 
+/* FOOTER */
+
 footer{
+  padding:100px 20px;
   text-align:center;
-  padding:90px 20px;
 }
+
 .final-date{
   font-family:"Cormorant Garamond",serif;
-  font-size:64px;
+  font-size:70px;
 }
+
+/* REVEAL */
 
 .reveal{
   opacity:0;
   transform:translateY(60px);
   transition:1s ease;
 }
+
 .reveal.active{
   opacity:1;
   transform:translateY(0);
 }
 
-@keyframes bounce{
-  0%,100%{transform:translateY(0)}
-  50%{transform:translateY(10px)}
-}
+/* ANIMATION */
+
 @keyframes siteIn{
-  from{opacity:0;filter:blur(14px)}
-  to{opacity:1;filter:blur(0)}
-}
-@keyframes slowZoom{
-  from{transform:scale(1.04)}
-  to{transform:scale(1.12)}
-}
-@keyframes float{
-  from{transform:translateY(100vh);opacity:0}
-  20%{opacity:.7}
-  to{transform:translateY(-20vh);opacity:0}
+  from{
+    opacity:0;
+    filter:blur(14px);
+  }
+  to{
+    opacity:1;
+    filter:blur(0);
+  }
 }
 
-@media(max-width:850px){
-  .grid-2,.grid-3{grid-template-columns:1fr}
-  .countdown{grid-template-columns:repeat(2,1fr)}
-  section{padding:78px 20px}
+@keyframes slowZoom{
+  from{
+    transform:scale(1.04);
+  }
+  to{
+    transform:scale(1.12);
+  }
 }
-@media(max-width:480px){
-  .envelope{height:590px}
-  .date-big{font-size:72px}
-  .hero{
-    min-height:100svh;
+
+@keyframes float{
+  from{
+    transform:translateY(100vh);
+    opacity:0;
   }
-  .hero-bg{
-    background-position:center top;
+  20%{
+    opacity:.7;
   }
+  to{
+    transform:translateY(-10vh);
+    opacity:0;
+  }
+}
+
+/* MOBILE */
+
+@media(max-width:850px){
+
+  .grid-2,
+  .grid-3{
+    grid-template-columns:1fr;
+  }
+
+  .countdown{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  section{
+    padding:80px 20px;
+  }
+
+}
+
+@media(max-width:520px){
+
   .hero h1{
-    font-size:64px;
+    font-size:56px;
+    white-space:nowrap;
   }
+
   .hero p{
     font-size:18px;
     line-height:1.9;
   }
+
+  .date-big{
+    font-size:84px;
+  }
+
+  .env-content{
+    padding-top:160px;
+  }
+
+  .tap{
+    margin-top:100px;
+    font-size:12px;
+  }
+
 }
+
 </style>
 </head>
 
@@ -369,18 +519,28 @@ footer{
 
 <button class="music-btn" id="musicBtn" onclick="toggleMusic()">♫</button>
 
+<!-- INTRO -->
+
 <div class="intro" id="intro">
+
   <div class="envelope" id="envelope" onclick="openInvitation()">
+
     <div class="flap"></div>
 
     <div class="env-content">
+
       <div class="date-big">06</div>
       <div class="dot">•</div>
+
       <div class="date-big">06</div>
       <div class="dot">•</div>
+
       <div class="date-big">26</div>
 
-      <div class="invite-word">DAVETLİSİNİZ</div>
+      <div class="invite-word">
+        DAVETLİSİNİZ
+      </div>
+
       <div class="heart">♥</div>
 
       <div class="tap">
@@ -388,47 +548,90 @@ footer{
         DOKUNUN
       </div>
 
-      <div class="arrow">⌄</div>
+      <div class="arrow"></div>
+
     </div>
+
   </div>
+
 </div>
+
+<!-- SITE -->
 
 <main class="site" id="site">
 
+  <!-- HERO -->
+
   <section class="hero">
+
     <div class="hero-bg"></div>
+
     <div class="dust" id="dust"></div>
 
     <div class="hero-content">
-      <h1>Zeynep &<br>Batuhan</h1>
-      <p>Bu anlamlı günde sizleri de aramızda görmekten mutluluk duyarız.</p>
-      <div class="hero-date">06 • 06 • 2026</div>
+
+      <h1>Zeynep & Batuhan</h1>
+
+      <p>
+        Bu anlamlı günde sizleri de aramızda görmekten mutluluk duyarız.
+      </p>
+
+      <div class="hero-date">
+        06 • 06 • 2026
+      </div>
+
     </div>
+
   </section>
 
+  <!-- FAMILY -->
+
   <section class="reveal">
+
     <div class="container">
-      <div class="section-title">AİLELERİMİZ</div>
+
+      <div class="section-title">
+        AİLELERİMİZ
+      </div>
 
       <div class="grid-2">
+
         <div class="card">
           <h2>Özbölük Ailesi</h2>
-          <p>Filiz<br>&<br>Nurettin</p>
+
+          <p>
+            Filiz<br>
+            &<br>
+            Nurettin
+          </p>
         </div>
 
         <div class="card">
           <h2>Yazıcı Ailesi</h2>
-          <p>Melike<br>&<br>Selahattin</p>
+
+          <p>
+            Melike<br>
+            &<br>
+            Selahattin
+          </p>
         </div>
+
       </div>
+
     </div>
+
   </section>
 
+  <!-- EVENTS -->
+
   <section class="reveal">
+
     <div class="container grid-3">
 
       <div class="card event">
+
         <h3>Kına</h3>
+
         <div class="label">TARİH</div>
         <p>04.06.2026 Perşembe</p>
 
@@ -436,6 +639,7 @@ footer{
         <p>19:00</p>
 
         <div class="label">KONUM</div>
+
         <p>
           Elitnaz Düğün Salonu<br>
           Mahmut Şevket Paşa Mah.<br>
@@ -443,22 +647,30 @@ footer{
           Okmeydanı
         </p>
 
-        <a class="map-btn" target="_blank" href="https://maps.google.com/?q=Elitnaz+Düğün+Salonu+Okmeydanı">
+        <a class="map-btn"
+        target="_blank"
+        href="https://maps.google.com/?q=Elitnaz+Düğün+Salonu">
           HARİTADA AÇ
         </a>
+
       </div>
 
       <div class="card event">
+
         <h3>Gelin Alma</h3>
+
         <div class="label">TARİH</div>
         <p>06.06.2026 Cumartesi</p>
 
         <div class="label">SAAT</div>
         <p>11:00</p>
+
       </div>
 
       <div class="card event">
+
         <h3>Nikah</h3>
+
         <div class="label">TARİH</div>
         <p>06.06.2026 Cumartesi</p>
 
@@ -466,96 +678,137 @@ footer{
         <p>13:30</p>
 
         <div class="label">KONUM</div>
+
         <p>
           Karadeniz Salonu<br>
           Zeytinburnu Nikah Dairesi<br>
-          Kazlıçeşme, Abay Cd. No:165<br>
+          Kazlıçeşme Abay Cd. No:165<br>
           Zeytinburnu / İstanbul
         </p>
 
-        <a class="map-btn" target="_blank" href="https://maps.google.com/?q=Zeytinburnu+Nikah+Dairesi">
+        <a class="map-btn"
+        target="_blank"
+        href="https://maps.google.com/?q=Zeytinburnu+Nikah+Dairesi">
           HARİTADA AÇ
         </a>
+
       </div>
 
     </div>
+
   </section>
+
+  <!-- COUNTDOWN -->
 
   <section class="reveal">
+
     <div class="container">
-      <div class="section-title">DÜĞÜNE KALAN SÜRE</div>
+
+      <div class="section-title">
+        DÜĞÜNE KALAN SÜRE
+      </div>
 
       <div class="countdown">
-        <div class="count-box"><strong id="days">0</strong><span>GÜN</span></div>
-        <div class="count-box"><strong id="hours">0</strong><span>SAAT</span></div>
-        <div class="count-box"><strong id="minutes">0</strong><span>DAKİKA</span></div>
-        <div class="count-box"><strong id="seconds">0</strong><span>SANİYE</span></div>
+
+        <div class="count-box">
+          <strong id="days">0</strong>
+          <span>GÜN</span>
+        </div>
+
+        <div class="count-box">
+          <strong id="hours">0</strong>
+          <span>SAAT</span>
+        </div>
+
+        <div class="count-box">
+          <strong id="minutes">0</strong>
+          <span>DAKİKA</span>
+        </div>
+
+        <div class="count-box">
+          <strong id="seconds">0</strong>
+          <span>SANİYE</span>
+        </div>
+
       </div>
+
     </div>
+
   </section>
 
-  <section class="reveal" style="text-align:center">
-    <a class="share-btn" target="_blank" href="https://wa.me/?text=Zeynep%20%26%20Batuhan%20davetiyesi">
-      WHATSAPP İLE PAYLAŞ
-    </a>
-  </section>
+  <!-- FOOTER -->
 
   <footer>
-    <div class="final-date">06 • 06 • 26</div>
+
+    <div class="final-date">
+      06 • 06 • 26
+    </div>
+
   </footer>
 
 </main>
 
 <script>
+
 const intro = document.getElementById("intro");
 const envelope = document.getElementById("envelope");
 const site = document.getElementById("site");
+
 const music = document.getElementById("music");
 const musicBtn = document.getElementById("musicBtn");
 
 music.volume = 0.55;
 
-function playMusic(){
-  music.play()
-    .then(() => {
-      musicBtn.innerHTML = "❚❚";
-    })
-    .catch(() => {
-      musicBtn.innerHTML = "♫";
-    });
-}
-
-function toggleMusic(){
-  if(music.paused){
-    playMusic();
-  }else{
-    music.pause();
-    musicBtn.innerHTML = "♫";
-  }
-}
+/* OPEN */
 
 function openInvitation(){
+
   envelope.classList.add("open");
 
   setTimeout(() => {
-    playMusic();
-  }, 300);
+
+    music.play()
+      .then(()=>{
+        musicBtn.innerHTML = "❚❚";
+      });
+
+  },300);
 
   setTimeout(() => {
     intro.classList.add("hide");
-  }, 750);
+  },700);
 
   setTimeout(() => {
     intro.style.display = "none";
     site.classList.add("show");
-    window.scrollTo(0,0);
-  }, 1800);
+  },1700);
+
 }
 
-/* Countdown */
+/* MUSIC */
+
+function toggleMusic(){
+
+  if(music.paused){
+
+    music.play();
+    musicBtn.innerHTML = "❚❚";
+
+  }else{
+
+    music.pause();
+    musicBtn.innerHTML = "♫";
+
+  }
+
+}
+
+/* COUNTDOWN */
+
 const targetDate = new Date("2026-06-06T13:30:00").getTime();
 
 function countdown(){
+
   const now = new Date().getTime();
   const distance = targetDate - now;
 
@@ -563,37 +816,57 @@ function countdown(){
 
   document.getElementById("days").innerText =
     Math.floor(distance / (1000*60*60*24));
+
   document.getElementById("hours").innerText =
     Math.floor((distance % (1000*60*60*24)) / (1000*60*60));
+
   document.getElementById("minutes").innerText =
     Math.floor((distance % (1000*60*60)) / (1000*60));
+
   document.getElementById("seconds").innerText =
     Math.floor((distance % (1000*60)) / 1000);
+
 }
+
 setInterval(countdown,1000);
+
 countdown();
 
-/* Reveal */
+/* PARTICLES */
+
+const dust = document.getElementById("dust");
+
+for(let i=0;i<55;i++){
+
+  const p = document.createElement("span");
+
+  p.style.left = Math.random()*100+"vw";
+  p.style.top = Math.random()*100+"vh";
+  p.style.animationDelay = Math.random()*8+"s";
+  p.style.animationDuration = 6+Math.random()*10+"s";
+
+  dust.appendChild(p);
+
+}
+
+/* REVEAL */
+
 const reveals = document.querySelectorAll(".reveal");
+
 const observer = new IntersectionObserver(entries => {
+
   entries.forEach(entry => {
+
     if(entry.isIntersecting){
       entry.target.classList.add("active");
     }
-  });
-},{threshold:.15});
-reveals.forEach(el => observer.observe(el));
 
-/* Dust */
-const dust = document.getElementById("dust");
-for(let i=0;i<55;i++){
-  const p = document.createElement("span");
-  p.style.left = Math.random()*100 + "vw";
-  p.style.top = Math.random()*100 + "vh";
-  p.style.animationDelay = Math.random()*8 + "s";
-  p.style.animationDuration = 6 + Math.random()*10 + "s";
-  dust.appendChild(p);
-}
+  });
+
+},{threshold:.15});
+
+reveals.forEach(r => observer.observe(r));
+
 </script>
 
 </body>
