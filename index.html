@@ -8,21 +8,23 @@
 
 <title>Zeynep & Batuhan</title>
 
-<meta name="description" content="Zeynep & Batuhan düğün davetiyesi">
+<meta name="description" content="Zeynep & Batuhan Nikah Davetiyesi">
 
 <meta property="og:title" content="06.06.26 • Davetlisiniz">
-<meta property="og:description" content="Zeynep & Batuhan düğün davetiyesi 🤍">
-<meta property="og:image" content="https://zeynepvebatuhan.com.tr/preview.jpg">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:url" content="https://zeynepvebatuhan.com.tr">
+<meta property="og:description" content="Zeynep & Batuhan Nikah Davetiyesi 🤍">
+<meta property="og:image" content="http://zeynepvebatuhan.com.tr//preview.jpg">
+<meta property="og:image:secure_url" content="http://zeynepvebatuhan.com.tr//preview.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1000">
+<meta property="og:image:height" content="525">
+<meta property="og:url" content="http://zeynepvebatuhan.com.tr//">
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="Zeynep & Batuhan">
+  
 
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Zeynep & Batuhan">
-<meta name="twitter:description" content="Zeynep & Batuhan düğün davetiyesi 🤍">
-<meta name="twitter:image" content="https://zeynepvebatuhan.com.tr/preview.jpg">
+<meta property="og:image" content="http://zeynepvebatuhan.com.tr//preview.jpg">
+<meta property="og:image:secure_url" content="http://zeynepvebatuhan.com.tr//preview.jpg">
+
+<meta name="twitter:image" content="http://zeynepvebatuhan.com.tr//preview.jpg">
 
 <meta name="theme-color" content="#f5f3f1">
 
@@ -135,21 +137,28 @@ body::after{
   display:flex;
   flex-direction:column;
   align-items:center;
+  justify-content:center;
   text-align:center;
-  padding-top:175px;
+  padding:70px 24px 90px;
 }
 
 .date-big{
-  font-family:"Cormorant Garamond",serif;
-  font-size:94px;
-  line-height:.78;
-  letter-spacing:-.05em;
+  font-family:Inter,sans-serif;
+  font-size:68px;
+  font-weight:300;
+  letter-spacing:.28em;
+  line-height:1;
 }
 
 .dot{
   margin:25px 0;
-  color:#8f7344;
-  font-size:13px;
+  color:#b89b67;
+  font-size:14px;
+
+  width:100%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
 }
 
 .invite-word{
@@ -158,44 +167,45 @@ body::after{
   letter-spacing:.46em;
 }
 
+.heart-wrap{
+  margin-top:8px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:10px;
+}
+
 .heart{
-  margin-top:48px;
-  font-size:27px;
+  font-size:26px;
+  color:#1d1d1d;
 }
 
 .tap{
-  margin-top:112px;
-  font-size:13px;
-  line-height:2;
-  letter-spacing:.43em;
+  font-size:12px;
+  letter-spacing:.42em;
+  color:#8c7446;
+  text-align:center;
+
+  animation:blink 2s ease-in-out infinite;
 }
 
-.arrow{
-  margin-top:36px;
-  width:48px;
-  height:32px;
-  position:relative;
+@keyframes blink{
+
+  0%{
+    opacity:.25;
+  }
+
+  50%{
+    opacity:1;
+  }
+
+  100%{
+    opacity:.25;
+  }
+
 }
 
-.arrow::before,
-.arrow::after{
-  content:"";
-  position:absolute;
-  top:14px;
-  width:34px;
-  height:1px;
-  background:#a88c58;
-}
 
-.arrow::before{
-  left:-1px;
-  transform:rotate(45deg);
-}
-
-.arrow::after{
-  right:-1px;
-  transform:rotate(-45deg);
-}
 
 /* SITE */
 
@@ -541,15 +551,49 @@ footer{
   }
 
   .env-content{
-    padding-top:165px;
+    justify-content:center;
+    padding:60px 22px 100px;
   }
 
   .date-big{
-    font-size:86px;
+    font-size:54px;
+    letter-spacing:.18em;
+    text-indent:.18em;
+    width:100%;
+    text-align:center;
+  }
+
+  .dot{
+    margin:16px 0;
+    width:100%;
+    text-align:center;
+    display:block;
+    letter-spacing:0;
+    text-indent:0;
+  }
+
+  .invite-word{
+    margin-top:28px;
+  }
+
+  .heart-wrap{
+    margin-top:18px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:16px;
+    width:100%;
   }
 
   .tap{
-    margin-top:100px;
+    width:100%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+
+    font-size:11px;
+    letter-spacing:.32em;
   }
 
   .hero h1{
@@ -558,7 +602,6 @@ footer{
   }
 
 }
-
 </style>
 
 </head>
@@ -597,14 +640,16 @@ footer{
         DAVETLİSİNİZ
       </div>
 
-      <div class="heart">♥</div>
+<div class="heart-wrap">
 
-      <div class="tap">
-        AÇMAK İÇİN<br>
-        DOKUNUN
-      </div>
+  <div class="heart">♥</div>
 
-      <div class="arrow"></div>
+  <div class="tap">
+    AÇMAK İÇİN DOKUNUN
+  </div>
+
+</div>
+      
 
     </div>
 
@@ -781,7 +826,7 @@ footer{
   <div class="container">
 
     <div class="section-title">
-      DÜĞÜNE KALAN SÜRE
+      NİKAHA KALAN SÜRE
     </div>
 
     <div class="countdown">
