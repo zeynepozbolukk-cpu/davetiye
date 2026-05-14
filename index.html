@@ -1,893 +1,599 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Zeynep & Batuhan</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 
 <style>
-
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-}
-
-html{
-  scroll-behavior:smooth;
-}
-
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
 body{
-  background:#f5f3f1;
-  color:#1c1c1c;
   font-family:Inter,sans-serif;
+  background:#f5f3f1;
+  color:#1d1d1d;
   overflow-x:hidden;
 }
-
-/* BACKGROUND */
-
-body::before{
-  content:"";
-  position:fixed;
-  inset:0;
-  background:
-    radial-gradient(circle at top,rgba(255,255,255,.9),transparent 40%),
-    radial-gradient(circle at bottom left,rgba(201,168,106,.08),transparent 35%);
-  z-index:-2;
-}
-
 body::after{
   content:"";
   position:fixed;
   inset:0;
-  background-image:url("https://www.transparenttextures.com/patterns/paper-fibers.png");
-  opacity:.15;
+  background:url("https://www.transparenttextures.com/patterns/paper-fibers.png");
+  opacity:.13;
   pointer-events:none;
-  z-index:-1;
+  z-index:20;
 }
 
 /* INTRO */
-
 .intro{
   min-height:100vh;
   display:flex;
   align-items:center;
   justify-content:center;
-  padding:24px;
-  transition:1.5s ease;
+  padding:22px;
+  background:#f5f3f1;
+  transition:1.4s ease;
 }
-
 .intro.hide{
   opacity:0;
   transform:scale(1.06);
   filter:blur(18px);
   pointer-events:none;
 }
-
-.envelope-wrap{
-  perspective:2000px;
-}
-
 .envelope{
   width:min(86vw,330px);
   height:600px;
   background:#faf8f5;
-  border:1px solid #e7ded4;
+  border:1px solid #e5dcd3;
   position:relative;
   overflow:hidden;
   cursor:pointer;
-  box-shadow:
-    0 25px 80px rgba(0,0,0,.12),
-    0 8px 25px rgba(0,0,0,.06);
+  box-shadow:0 28px 80px rgba(0,0,0,.12);
 }
-
 .envelope::before{
   content:"";
   position:absolute;
   inset:18px;
-  border:1px solid #e7ded4;
+  border:1px solid #e5dcd3;
   z-index:5;
 }
-
 .flap{
   position:absolute;
   top:0;
   left:0;
   width:100%;
-  height:140px;
+  height:138px;
   background:#f8f5f1;
-  border-bottom:1px solid #e7ded4;
+  border-bottom:1px solid #e5dcd3;
   transform-origin:top;
-  transition:1.4s cubic-bezier(.22,1,.36,1);
+  transition:1.35s cubic-bezier(.22,1,.36,1);
   z-index:10;
 }
-
 .flap::after{
   content:"";
-  position:absolute;
-  left:50%;
-  bottom:-45px;
-  transform:translateX(-50%);
-  width:90px;
-  height:90px;
+  width:88px;
+  height:88px;
   border-radius:50%;
   background:#f8f5f1;
-  border:1px solid #e7ded4;
+  border:1px solid #e5dcd3;
+  position:absolute;
+  left:50%;
+  bottom:-44px;
+  transform:translateX(-50%);
 }
-
-.envelope.open .flap{
-  transform:rotateX(-145deg);
-}
-
+.envelope.open .flap{transform:rotateX(-145deg)}
 .env-content{
   height:100%;
   display:flex;
   flex-direction:column;
   align-items:center;
   justify-content:flex-start;
-  padding-top:35px;
+  padding-top:34px;
   position:relative;
-  z-index:20;
+  z-index:15;
+  text-align:center;
 }
-
 .date-big{
   font-family:"Cormorant Garamond",serif;
   font-size:76px;
   line-height:.85;
 }
-
 .dot{
   margin:12px 0;
-  color:#b79b69;
+  color:#b89b67;
 }
-
 .invite-word{
   margin-top:30px;
   font-size:12px;
-  letter-spacing:.45em;
+  letter-spacing:.43em;
 }
-
 .heart{
   margin-top:28px;
   font-size:22px;
 }
-
 .tap{
-  margin-top:90px;
+  margin-top:88px;
   font-size:11px;
   line-height:2;
-  letter-spacing:.45em;
-  text-align:center;
+  letter-spacing:.43em;
 }
-
 .arrow{
   margin-top:22px;
-  color:#b79b69;
+  color:#b89b67;
   animation:bounce 2s infinite;
 }
 
 /* SITE */
-
 .site{
   display:none;
   opacity:0;
-  animation:siteIn 1.8s ease forwards;
+  animation:siteIn 1.5s ease forwards;
 }
-
-.site.show{
-  display:block;
-}
+.site.show{display:block}
 
 /* HERO */
-
 .hero{
   min-height:100vh;
   position:relative;
-  overflow:hidden;
   display:flex;
   align-items:center;
   justify-content:center;
   text-align:center;
   color:white;
+  overflow:hidden;
 }
-
-.hero-image{
+.hero-bg{
   position:absolute;
   inset:0;
-  background:
-    linear-gradient(rgba(0,0,0,.58),rgba(0,0,0,.58)),
-    url("hero.jpg") center center/cover;
-  transform:scale(1.06);
-  animation:slowZoom 18s ease infinite alternate;
+  background-image:
+    linear-gradient(
+      rgba(0,0,0,.42),
+      rgba(0,0,0,.44)
+    ),
+    url("./hero.jpg");
+  background-size:cover;
+  background-position:center;
+  transform:scale(1.04);
+  animation:slowZoom 18s ease-in-out infinite alternate;
 }
-
 .hero::after{
   content:"";
   position:absolute;
   inset:0;
   background:
-    radial-gradient(circle at center,transparent 20%,rgba(0,0,0,.35));
+    radial-gradient(circle at center,rgba(0,0,0,.08),rgba(0,0,0,.58)),
+    linear-gradient(to bottom,rgba(0,0,0,.08),rgba(0,0,0,.45));
+  z-index:1;
 }
-
 .hero-content{
   position:relative;
-  z-index:5;
-  padding:20px;
+  z-index:3;
+  padding:0 24px;
+  margin-top:20px;
 }
-
 .hero h1{
   font-family:"Cormorant Garamond",serif;
-  font-size:clamp(58px,10vw,120px);
-  font-weight:400;
   font-style:italic;
-  margin-bottom:28px;
+  font-weight:400;
+  font-size:clamp(60px,12vw,118px);
+  line-height:1.05;
+  text-shadow:0 5px 28px rgba(0,0,0,.42);
 }
-
 .hero p{
-  max-width:680px;
-  margin:auto;
+  max-width:720px;
+  margin:34px auto 0;
+  font-size:clamp(16px,3.8vw,22px);
   line-height:2;
-  font-size:18px;
+  text-shadow:0 3px 18px rgba(0,0,0,.55);
 }
-
 .hero-date{
-  margin-top:34px;
-  letter-spacing:.5em;
-  font-size:12px;
-  opacity:.8;
+  margin-top:36px;
+  letter-spacing:.48em;
+  font-size:13px;
+  opacity:.95;
 }
 
-/* DUST */
-
+/* PARTICLES */
 .dust{
   position:absolute;
   inset:0;
-  overflow:hidden;
+  z-index:2;
+  pointer-events:none;
 }
-
 .dust span{
   position:absolute;
-  width:2px;
-  height:2px;
+  width:3px;
+  height:3px;
   border-radius:50%;
-  background:#d9b97b;
-  opacity:.4;
+  background:#d7b36a;
+  opacity:.45;
   animation:float 8s linear infinite;
 }
 
-/* GENERAL */
-
-section{
-  padding:110px 24px;
-}
-
-.container{
-  max-width:1180px;
-  margin:auto;
-}
-
+/* SECTIONS */
+section{padding:95px 22px}
+.container{max-width:1120px;margin:auto}
 .section-title{
   text-align:center;
-  margin-bottom:70px;
-  letter-spacing:.4em;
-  font-size:12px;
+  letter-spacing:.42em;
   color:#b89b67;
+  font-size:12px;
+  margin-bottom:60px;
 }
-
-.grid-2{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:28px;
-}
-
-.grid-3{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:28px;
-}
-
+.grid-2,.grid-3{display:grid;gap:26px}
+.grid-2{grid-template-columns:repeat(2,1fr)}
+.grid-3{grid-template-columns:repeat(3,1fr)}
 .card{
-  background:rgba(255,255,255,.55);
+  background:rgba(255,255,255,.58);
   border:1px solid #e7ded4;
-  padding:50px 36px;
-  backdrop-filter:blur(12px);
-  box-shadow:
-    0 18px 55px rgba(0,0,0,.06);
-}
-
-.card h2,
-.card h3{
-  font-family:"Cormorant Garamond",serif;
-  font-size:42px;
-  font-weight:400;
-  margin-bottom:30px;
-}
-
-.family{
+  padding:44px 28px;
   text-align:center;
+  box-shadow:0 20px 60px rgba(0,0,0,.06);
 }
-
-.family p{
-  line-height:2.4;
-  font-size:17px;
+.card h2,.card h3{
+  font-family:"Cormorant Garamond",serif;
+  font-size:40px;
+  font-weight:400;
+  margin-bottom:28px;
 }
-
-.event p{
+.card p{
   line-height:2;
-  margin-bottom:22px;
 }
-
 .label{
-  margin-bottom:10px;
   letter-spacing:.35em;
   font-size:11px;
   color:#b89b67;
+  margin-bottom:8px;
 }
-
-.map-btn{
+.event p{margin-bottom:22px}
+.map-btn,.share-btn{
   display:inline-block;
-  margin-top:16px;
-  border:1px solid #1c1c1c;
-  color:#1c1c1c;
-  padding:14px 20px;
+  margin-top:14px;
+  padding:13px 20px;
+  border:1px solid #1d1d1d;
+  color:#1d1d1d;
   text-decoration:none;
   font-size:11px;
-  letter-spacing:.25em;
-  transition:.4s;
+  letter-spacing:.22em;
 }
-
-.map-btn:hover{
-  background:#1c1c1c;
-  color:white;
-}
-
-/* PHOTO */
-
-.photo-wrap{
-  max-width:760px;
-  margin:auto;
-  background:white;
-  padding:14px;
-  border-radius:40px;
-  border:1px solid #e7ded4;
-  box-shadow:
-    0 24px 80px rgba(0,0,0,.1);
-}
-
-.photo{
-  height:720px;
-  border-radius:30px;
-  overflow:hidden;
-  position:relative;
-}
-
-.photo img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-}
-
-/* COUNTDOWN */
-
 .countdown{
   display:grid;
   grid-template-columns:repeat(4,1fr);
-  gap:18px;
-  margin-top:60px;
+  gap:16px;
+  margin-top:45px;
 }
-
 .count-box{
-  background:rgba(255,255,255,.55);
   border:1px solid #e7ded4;
-  padding:34px 10px;
+  background:rgba(255,255,255,.58);
+  padding:28px 8px;
   text-align:center;
 }
-
 .count-box strong{
   display:block;
   font-family:"Cormorant Garamond",serif;
-  font-size:56px;
+  font-size:48px;
   font-weight:400;
 }
-
 .count-box span{
-  letter-spacing:.3em;
   font-size:11px;
+  letter-spacing:.28em;
 }
 
 /* MUSIC */
-
 .music-btn{
   position:fixed;
-  right:20px;
-  bottom:20px;
-  width:56px;
-  height:56px;
+  right:18px;
+  bottom:18px;
+  width:58px;
+  height:58px;
   border-radius:50%;
-  border:1px solid #d8cab3;
-  background:rgba(255,255,255,.72);
+  border:1px solid #d7c6a5;
+  background:rgba(255,255,255,.82);
   backdrop-filter:blur(12px);
-  cursor:pointer;
-  z-index:100;
   color:#b89b67;
-  font-size:18px;
-  box-shadow:0 10px 30px rgba(0,0,0,.08);
+  font-size:20px;
+  z-index:100;
+  cursor:pointer;
+  box-shadow:0 12px 35px rgba(0,0,0,.18);
 }
-
-/* FOOTER */
 
 footer{
   text-align:center;
-  padding:120px 20px;
+  padding:90px 20px;
 }
-
 .final-date{
   font-family:"Cormorant Garamond",serif;
-  font-size:70px;
+  font-size:64px;
 }
-
-/* REVEAL */
 
 .reveal{
   opacity:0;
-  transform:translateY(80px);
-  transition:1.2s ease;
+  transform:translateY(60px);
+  transition:1s ease;
 }
-
 .reveal.active{
   opacity:1;
   transform:translateY(0);
 }
 
-/* ANIMATION */
-
 @keyframes bounce{
   0%,100%{transform:translateY(0)}
   50%{transform:translateY(10px)}
 }
-
 @keyframes siteIn{
-  from{
-    opacity:0;
-    filter:blur(14px);
-  }
-  to{
-    opacity:1;
-    filter:blur(0);
-  }
+  from{opacity:0;filter:blur(14px)}
+  to{opacity:1;filter:blur(0)}
 }
-
-@keyframes float{
-  from{
-    transform:translateY(100vh);
-    opacity:0;
-  }
-  20%{
-    opacity:1;
-  }
-  to{
-    transform:translateY(-10vh);
-    opacity:0;
-  }
-}
-
 @keyframes slowZoom{
-  from{
-    transform:scale(1.06);
-  }
-  to{
-    transform:scale(1.12);
-  }
+  from{transform:scale(1.04)}
+  to{transform:scale(1.12)}
+}
+@keyframes float{
+  from{transform:translateY(100vh);opacity:0}
+  20%{opacity:.7}
+  to{transform:translateY(-20vh);opacity:0}
 }
 
-/* MOBILE */
-
-@media(max-width:900px){
-
-  section{
-    padding:90px 20px;
-  }
-
-  .grid-2,
-  .grid-3{
-    grid-template-columns:1fr;
-  }
-
-  .photo{
-    height:500px;
-  }
-
-  .countdown{
-    grid-template-columns:repeat(2,1fr);
-  }
-
-  .hero h1{
-    font-size:72px;
-  }
-
+@media(max-width:850px){
+  .grid-2,.grid-3{grid-template-columns:1fr}
+  .countdown{grid-template-columns:repeat(2,1fr)}
+  section{padding:78px 20px}
 }
-
 @media(max-width:480px){
-
+  .envelope{height:590px}
+  .date-big{font-size:72px}
+  .hero{
+    min-height:100svh;
+  }
+  .hero-bg{
+    background-position:center top;
+  }
   .hero h1{
-    font-size:56px;
+    font-size:64px;
   }
-
   .hero p{
-    font-size:15px;
+    font-size:18px;
+    line-height:1.9;
   }
-
-  .photo{
-    height:420px;
-  }
-
-  .count-box strong{
-    font-size:42px;
-  }
-
 }
-
 </style>
 </head>
 
 <body>
 
-<button class="music-btn" onclick="toggleMusic()">♫</button>
-
-<audio id="music" loop>
-  <source src="music.mp3" type="audio/mpeg">
+<audio id="music" loop preload="auto" playsinline>
+  <source src="./music.mp3" type="audio/mpeg">
 </audio>
 
-<!-- INTRO -->
+<button class="music-btn" id="musicBtn" onclick="toggleMusic()">♫</button>
 
 <div class="intro" id="intro">
+  <div class="envelope" id="envelope" onclick="openInvitation()">
+    <div class="flap"></div>
 
-  <div class="envelope-wrap">
+    <div class="env-content">
+      <div class="date-big">06</div>
+      <div class="dot">•</div>
+      <div class="date-big">06</div>
+      <div class="dot">•</div>
+      <div class="date-big">26</div>
 
-    <div class="envelope" id="envelope" onclick="openInvitation()">
+      <div class="invite-word">DAVETLİSİNİZ</div>
+      <div class="heart">♥</div>
 
-      <div class="flap"></div>
-
-      <div class="env-content">
-
-        <div class="date-big">06</div>
-        <div class="dot">•</div>
-
-        <div class="date-big">06</div>
-        <div class="dot">•</div>
-
-        <div class="date-big">26</div>
-
-        <div class="invite-word">
-          DAVETLİSİNİZ
-        </div>
-
-        <div class="heart">♥</div>
-
-        <div class="tap">
-          AÇMAK İÇİN<br>
-          DOKUNUN
-        </div>
-
-        <div class="arrow">⌄</div>
-
+      <div class="tap">
+        AÇMAK İÇİN<br>
+        DOKUNUN
       </div>
 
+      <div class="arrow">⌄</div>
     </div>
-
   </div>
-
 </div>
-
-<!-- SITE -->
 
 <main class="site" id="site">
 
-  <!-- HERO -->
-
   <section class="hero">
-
-    <div class="hero-image"></div>
-
+    <div class="hero-bg"></div>
     <div class="dust" id="dust"></div>
 
     <div class="hero-content">
-
-      <h1>Zeynep & Batuhan</h1>
-
-      <p>
-        Bu anlamlı günde sizleri de aramızda görmekten mutluluk duyarız.
-      </p>
-
-      <div class="hero-date">
-        06 • 06 • 2026
-      </div>
-
+      <h1>Zeynep &<br>Batuhan</h1>
+      <p>Bu anlamlı günde sizleri de aramızda görmekten mutluluk duyarız.</p>
+      <div class="hero-date">06 • 06 • 2026</div>
     </div>
-
   </section>
 
-  <!-- FAMILY -->
-
   <section class="reveal">
-
     <div class="container">
-
-      <div class="section-title">
-        AİLELERİMİZ
-      </div>
+      <div class="section-title">AİLELERİMİZ</div>
 
       <div class="grid-2">
-
-        <div class="card family">
+        <div class="card">
           <h2>Özbölük Ailesi</h2>
-
-          <p>
-            Filiz<br>
-            &<br>
-            Nurettin
-          </p>
+          <p>Filiz<br>&<br>Nurettin</p>
         </div>
 
-        <div class="card family">
+        <div class="card">
           <h2>Yazıcı Ailesi</h2>
-
-          <p>
-            Melike<br>
-            &<br>
-            Selahattin
-          </p>
+          <p>Melike<br>&<br>Selahattin</p>
         </div>
+      </div>
+    </div>
+  </section>
 
+  <section class="reveal">
+    <div class="container grid-3">
+
+      <div class="card event">
+        <h3>Kına</h3>
+        <div class="label">TARİH</div>
+        <p>04.06.2026 Perşembe</p>
+
+        <div class="label">SAAT</div>
+        <p>19:00</p>
+
+        <div class="label">KONUM</div>
+        <p>
+          Elitnaz Düğün Salonu<br>
+          Mahmut Şevket Paşa Mah.<br>
+          Kuruçay Cad. No:10<br>
+          Okmeydanı
+        </p>
+
+        <a class="map-btn" target="_blank" href="https://maps.google.com/?q=Elitnaz+Düğün+Salonu+Okmeydanı">
+          HARİTADA AÇ
+        </a>
+      </div>
+
+      <div class="card event">
+        <h3>Gelin Alma</h3>
+        <div class="label">TARİH</div>
+        <p>06.06.2026 Cumartesi</p>
+
+        <div class="label">SAAT</div>
+        <p>11:00</p>
+      </div>
+
+      <div class="card event">
+        <h3>Nikah</h3>
+        <div class="label">TARİH</div>
+        <p>06.06.2026 Cumartesi</p>
+
+        <div class="label">SAAT</div>
+        <p>13:30</p>
+
+        <div class="label">KONUM</div>
+        <p>
+          Karadeniz Salonu<br>
+          Zeytinburnu Nikah Dairesi<br>
+          Kazlıçeşme, Abay Cd. No:165<br>
+          Zeytinburnu / İstanbul
+        </p>
+
+        <a class="map-btn" target="_blank" href="https://maps.google.com/?q=Zeytinburnu+Nikah+Dairesi">
+          HARİTADA AÇ
+        </a>
       </div>
 
     </div>
-
   </section>
 
-  <!-- EVENTS -->
-
   <section class="reveal">
-
     <div class="container">
-
-      <div class="grid-3">
-
-        <div class="card event">
-
-          <h3>Kına</h3>
-
-          <div class="label">TARİH</div>
-          <p>04.06.2026 Perşembe</p>
-
-          <div class="label">SAAT</div>
-          <p>19:00</p>
-
-          <div class="label">KONUM</div>
-
-          <p>
-            Elitnaz Düğün Salonu<br>
-            Mahmut Şevket Paşa Mah.<br>
-            Kuruçay Cad. No:10<br>
-            Okmeydanı
-          </p>
-
-          <a class="map-btn" target="_blank"
-          href="https://maps.google.com/?q=Elitnaz+Düğün+Salonu">
-            HARİTADA AÇ
-          </a>
-
-        </div>
-
-        <div class="card event">
-
-          <h3>Gelin Alma</h3>
-
-          <div class="label">TARİH</div>
-          <p>06.06.2026 Cumartesi</p>
-
-          <div class="label">SAAT</div>
-          <p>11:00</p>
-
-        </div>
-
-        <div class="card event">
-
-          <h3>Nikah</h3>
-
-          <div class="label">TARİH</div>
-          <p>06.06.2026 Cumartesi</p>
-
-          <div class="label">SAAT</div>
-          <p>13:30</p>
-
-          <div class="label">KONUM</div>
-
-          <p>
-            Karadeniz Salonu<br>
-            Zeytinburnu Nikah Dairesi<br>
-            Kazlıçeşme Abay Cd. No:165<br>
-            Zeytinburnu / İstanbul
-          </p>
-
-          <a class="map-btn" target="_blank"
-          href="https://maps.google.com/?q=Zeytinburnu+Nikah+Dairesi">
-            HARİTADA AÇ
-          </a>
-
-        </div>
-
-      </div>
-
-    </div>
-
-  </section>
-
-  <!-- COUNTDOWN -->
-
-  <section class="reveal">
-
-    <div class="container">
-
-      <div class="section-title">
-        DÜĞÜNE KALAN SÜRE
-      </div>
+      <div class="section-title">DÜĞÜNE KALAN SÜRE</div>
 
       <div class="countdown">
-
-        <div class="count-box">
-          <strong id="days">0</strong>
-          <span>GÜN</span>
-        </div>
-
-        <div class="count-box">
-          <strong id="hours">0</strong>
-          <span>SAAT</span>
-        </div>
-
-        <div class="count-box">
-          <strong id="minutes">0</strong>
-          <span>DAKİKA</span>
-        </div>
-
-        <div class="count-box">
-          <strong id="seconds">0</strong>
-          <span>SANİYE</span>
-        </div>
-
+        <div class="count-box"><strong id="days">0</strong><span>GÜN</span></div>
+        <div class="count-box"><strong id="hours">0</strong><span>SAAT</span></div>
+        <div class="count-box"><strong id="minutes">0</strong><span>DAKİKA</span></div>
+        <div class="count-box"><strong id="seconds">0</strong><span>SANİYE</span></div>
       </div>
-
     </div>
-
   </section>
 
-  <!-- PHOTO -->
-
-  <section class="reveal">
-
-    <div class="photo-wrap">
-
-      <div class="photo">
-
-        <img src="couple.jpg" alt="photo">
-
-      </div>
-
-    </div>
-
+  <section class="reveal" style="text-align:center">
+    <a class="share-btn" target="_blank" href="https://wa.me/?text=Zeynep%20%26%20Batuhan%20davetiyesi">
+      WHATSAPP İLE PAYLAŞ
+    </a>
   </section>
-
-  <!-- FOOTER -->
 
   <footer>
-
-    <div class="final-date">
-      06 • 06 • 26
-    </div>
-
+    <div class="final-date">06 • 06 • 26</div>
   </footer>
 
 </main>
 
 <script>
-
 const intro = document.getElementById("intro");
 const envelope = document.getElementById("envelope");
 const site = document.getElementById("site");
+const music = document.getElementById("music");
+const musicBtn = document.getElementById("musicBtn");
+
+music.volume = 0.55;
+
+function playMusic(){
+  music.play()
+    .then(() => {
+      musicBtn.innerHTML = "❚❚";
+    })
+    .catch(() => {
+      musicBtn.innerHTML = "♫";
+    });
+}
+
+function toggleMusic(){
+  if(music.paused){
+    playMusic();
+  }else{
+    music.pause();
+    musicBtn.innerHTML = "♫";
+  }
+}
 
 function openInvitation(){
-
   envelope.classList.add("open");
 
   setTimeout(() => {
+    playMusic();
+  }, 300);
+
+  setTimeout(() => {
     intro.classList.add("hide");
-  },700);
+  }, 750);
 
   setTimeout(() => {
     intro.style.display = "none";
     site.classList.add("show");
     window.scrollTo(0,0);
-  },1800);
-
+  }, 1800);
 }
 
-/* COUNTDOWN */
-
+/* Countdown */
 const targetDate = new Date("2026-06-06T13:30:00").getTime();
 
 function countdown(){
-
   const now = new Date().getTime();
-
   const distance = targetDate - now;
+
+  if(distance <= 0) return;
 
   document.getElementById("days").innerText =
     Math.floor(distance / (1000*60*60*24));
-
   document.getElementById("hours").innerText =
     Math.floor((distance % (1000*60*60*24)) / (1000*60*60));
-
   document.getElementById("minutes").innerText =
     Math.floor((distance % (1000*60*60)) / (1000*60));
-
   document.getElementById("seconds").innerText =
     Math.floor((distance % (1000*60)) / 1000);
-
 }
-
 setInterval(countdown,1000);
+countdown();
 
-/* REVEAL */
-
+/* Reveal */
 const reveals = document.querySelectorAll(".reveal");
-
 const observer = new IntersectionObserver(entries => {
-
   entries.forEach(entry => {
-
     if(entry.isIntersecting){
       entry.target.classList.add("active");
     }
-
   });
-
 },{threshold:.15});
+reveals.forEach(el => observer.observe(el));
 
-reveals.forEach(r => observer.observe(r));
-
-/* DUST */
-
+/* Dust */
 const dust = document.getElementById("dust");
-
-for(let i=0;i<40;i++){
-
-  const particle = document.createElement("span");
-
-  particle.style.left = Math.random()*100+"vw";
-  particle.style.top = Math.random()*100+"vh";
-  particle.style.animationDelay = Math.random()*8+"s";
-  particle.style.animationDuration = 6+Math.random()*10+"s";
-
-  dust.appendChild(particle);
-
+for(let i=0;i<55;i++){
+  const p = document.createElement("span");
+  p.style.left = Math.random()*100 + "vw";
+  p.style.top = Math.random()*100 + "vh";
+  p.style.animationDelay = Math.random()*8 + "s";
+  p.style.animationDuration = 6 + Math.random()*10 + "s";
+  dust.appendChild(p);
 }
-
-/* MUSIC */
-
-function toggleMusic(){
-
-  const music = document.getElementById("music");
-
-  if(music.paused){
-    music.play();
-  }else{
-    music.pause();
-  }
-
-}
-
 </script>
 
 </body>
