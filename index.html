@@ -1,440 +1,672 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Zeynep & Batuhan</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Zeynep & Batuhan</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 
-  <style>
-    *{box-sizing:border-box;margin:0;padding:0}
-    html{scroll-behavior:smooth}
-    body{
-      font-family:Inter,sans-serif;
-      background:#f5f3f1;
-      color:#1d1d1d;
-      overflow-x:hidden;
-    }
-    body:before{
-      content:"";
-      position:fixed;
-      inset:0;
-      background:
-        radial-gradient(circle at 50% 15%,rgba(255,255,255,.85),transparent 45%),
-        radial-gradient(circle at 20% 80%,rgba(201,168,106,.12),transparent 35%);
-      pointer-events:none;
-      z-index:-2;
-    }
-    body:after{
-      content:"";
-      position:fixed;
-      inset:0;
-      background-image:url("https://www.transparenttextures.com/patterns/paper-fibers.png");
-      opacity:.18;
-      pointer-events:none;
-      z-index:-1;
-    }
+<style>
 
-    .intro{
-      min-height:100vh;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      padding:28px;
-      transition:1.3s ease;
-      position:relative;
-    }
-    .intro.hide{
-      opacity:0;
-      filter:blur(18px);
-      transform:scale(1.08);
-      pointer-events:none;
-    }
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
 
-    .envelope-wrap{
-      perspective:1800px;
-      animation:fadeUp 1.4s ease both;
-    }
-    .envelope{
-      width:min(82vw,330px);
-      height:min(150vw,650px);
-      background:#faf8f5;
-      border:1px solid #e7ded4;
-      box-shadow:0 28px 80px rgba(0,0,0,.12);
-      position:relative;
-      cursor:pointer;
-      overflow:hidden;
-    }
-    .envelope:before{
-      content:"";
-      position:absolute;
-      inset:18px;
-      border:1px solid #e6ded5;
-      z-index:3;
-      pointer-events:none;
-    }
-    .flap{
-      position:absolute;
-      top:0;
-      left:0;
-      width:100%;
-      height:150px;
-      background:#f8f5f1;
-      border-bottom:1px solid #e7ded4;
-      transform-origin:top center;
-      transition:1.3s cubic-bezier(.22,1,.36,1);
-      z-index:4;
-    }
-    .flap:after{
-      content:"";
-      width:92px;
-      height:92px;
-      border-radius:50%;
-      background:#f8f5f1;
-      border:1px solid #e7ded4;
-      position:absolute;
-      left:50%;
-      bottom:-46px;
-      transform:translateX(-50%);
-    }
-    .envelope.open .flap{
-      transform:rotateX(-145deg);
-    }
+html{
+  scroll-behavior:smooth;
+}
 
-    .env-content{
-      height:100%;
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      justify-content:center;
-      position:relative;
-      z-index:5;
-      text-align:center;
-    }
-    .date-big{
-      font-family:"Cormorant Garamond",serif;
-      font-size:88px;
-      line-height:.92;
-      font-weight:400;
-    }
-    .dot{
-      color:#b99b61;
-      margin:16px 0;
-      font-size:18px;
-    }
-    .invite-word{
-      margin-top:34px;
-      font-size:13px;
-      letter-spacing:.45em;
-    }
-    .heart{
-      margin-top:34px;
-      font-size:24px;
-    }
-    .tap{
-      margin-top:92px;
-      font-size:12px;
-      line-height:2;
-      letter-spacing:.42em;
-    }
-    .arrow{
-      margin-top:26px;
-      color:#a98c55;
-      font-size:30px;
-      animation:bounce 2s infinite;
-    }
+body{
+  background:#f5f3f1;
+  color:#1c1c1c;
+  font-family:Inter,sans-serif;
+  overflow-x:hidden;
+}
 
-    .dust span{
-      position:fixed;
-      width:4px;
-      height:4px;
-      border-radius:50%;
-      background:rgba(201,168,106,.35);
-      animation:float 8s infinite linear;
-      z-index:1;
-    }
+/* BACKGROUND */
 
-    .site{
-      display:none;
-      opacity:0;
-      animation:siteIn 1.5s ease forwards;
-    }
-    .site.show{display:block}
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  background:
+    radial-gradient(circle at top,rgba(255,255,255,.9),transparent 40%),
+    radial-gradient(circle at bottom left,rgba(201,168,106,.08),transparent 35%);
+  z-index:-2;
+}
 
-    section{
-      padding:90px 22px;
-      position:relative;
-    }
-    .hero{
-      min-height:100vh;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      text-align:center;
-      overflow:hidden;
-    }
-    .bg-date{
-      position:absolute;
-      font-family:"Cormorant Garamond",serif;
-      font-size:180px;
-      opacity:.04;
-      top:18%;
-      left:50%;
-      transform:translateX(-50%);
-      white-space:nowrap;
-    }
-    h1{
-      font-family:"Cormorant Garamond",serif;
-      font-size:clamp(58px,12vw,110px);
-      font-style:italic;
-      font-weight:400;
-      line-height:1;
-    }
-    .hero p{
-      max-width:600px;
-      margin:32px auto 0;
-      font-size:17px;
-      line-height:2;
-      letter-spacing:.04em;
-    }
-    .gold{color:#b99b61}
+body::after{
+  content:"";
+  position:fixed;
+  inset:0;
+  background-image:url("https://www.transparenttextures.com/patterns/paper-fibers.png");
+  opacity:.15;
+  pointer-events:none;
+  z-index:-1;
+}
 
-    .container{
-      max-width:1100px;
-      margin:auto;
-    }
-    .grid-2,.grid-3{
-      display:grid;
-      gap:26px;
-    }
-    .grid-2{grid-template-columns:repeat(2,1fr)}
-    .grid-3{grid-template-columns:repeat(3,1fr)}
-    .card{
-      background:rgba(255,255,255,.52);
-      border:1px solid #e7ded4;
-      box-shadow:0 22px 60px rgba(0,0,0,.07);
-      padding:38px 28px;
-      text-align:center;
-      backdrop-filter:blur(10px);
-    }
-    .card h2,.card h3{
-      font-family:"Cormorant Garamond",serif;
-      font-size:38px;
-      font-weight:400;
-      margin-bottom:22px;
-    }
-    .spaced{
-      letter-spacing:.28em;
-      font-size:13px;
-      line-height:2;
-    }
-    .event p{
-      line-height:1.8;
-      margin-bottom:18px;
-    }
-    .label{
-      letter-spacing:.35em;
-      font-size:11px;
-      margin-bottom:8px;
-      color:#8c7447;
-    }
-    .map-btn,.share-btn{
-      display:inline-block;
-      margin-top:14px;
-      padding:13px 20px;
-      border:1px solid #1d1d1d;
-      color:#1d1d1d;
-      text-decoration:none;
-      font-size:12px;
-      letter-spacing:.16em;
-      transition:.35s;
-    }
-    .map-btn:hover,.share-btn:hover{
-      background:#1d1d1d;
-      color:#fff;
-    }
-    .photo-frame{
-      max-width:720px;
-      margin:auto;
-      padding:12px;
-      background:#fff;
-      border:1px solid #e7ded4;
-      box-shadow:0 26px 80px rgba(0,0,0,.1);
-      border-radius:34px;
-    }
-    .photo{
-      height:520px;
-      border-radius:26px;
-      background:
-        linear-gradient(rgba(0,0,0,.08),rgba(0,0,0,.08)),
-        url("couple.jpg") center/cover;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      color:white;
-      font-family:"Cormorant Garamond",serif;
-      font-size:38px;
-      text-shadow:0 2px 18px rgba(0,0,0,.35);
-    }
-    .countdown{
-      display:grid;
-      grid-template-columns:repeat(4,1fr);
-      gap:14px;
-      max-width:720px;
-      margin:40px auto 0;
-    }
-    .count-box{
-      border:1px solid #e7ded4;
-      padding:22px 10px;
-      background:rgba(255,255,255,.5);
-    }
-    .count-box strong{
-      display:block;
-      font-family:"Cormorant Garamond",serif;
-      font-size:42px;
-      font-weight:400;
-    }
-    .count-box span{
-      font-size:11px;
-      letter-spacing:.25em;
-    }
-    .music{
-      position:fixed;
-      right:18px;
-      top:18px;
-      z-index:30;
-      width:50px;
-      height:50px;
-      border-radius:50%;
-      border:1px solid #e7ded4;
-      background:rgba(255,255,255,.72);
-      backdrop-filter:blur(12px);
-      box-shadow:0 12px 40px rgba(0,0,0,.08);
-      cursor:pointer;
-    }
-    footer{
-      text-align:center;
-      padding:70px 20px 100px;
-    }
-    footer .final-date{
-      font-family:"Cormorant Garamond",serif;
-      font-size:60px;
-    }
+/* INTRO */
 
-    .reveal{
-      opacity:0;
-      transform:translateY(60px);
-      transition:1s ease;
-    }
-    .reveal.visible{
-      opacity:1;
-      transform:translateY(0);
-    }
+.intro{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:24px;
+  transition:1.5s ease;
+}
 
-    @keyframes fadeUp{
-      from{opacity:0;transform:translateY(40px)}
-      to{opacity:1;transform:translateY(0)}
-    }
-    @keyframes siteIn{
-      from{opacity:0;filter:blur(16px);transform:scale(1.04)}
-      to{opacity:1;filter:blur(0);transform:scale(1)}
-    }
-    @keyframes bounce{
-      0%,100%{transform:translateY(0)}
-      50%{transform:translateY(10px)}
-    }
-    @keyframes float{
-      from{transform:translateY(100vh);opacity:0}
-      20%{opacity:1}
-      to{transform:translateY(-10vh);opacity:0}
-    }
+.intro.hide{
+  opacity:0;
+  transform:scale(1.06);
+  filter:blur(18px);
+  pointer-events:none;
+}
 
-    @media(max-width:850px){
-      .grid-2,.grid-3{grid-template-columns:1fr}
-      section{padding:72px 20px}
-      .photo{height:430px}
-      .countdown{grid-template-columns:repeat(2,1fr)}
-      .bg-date{font-size:120px}
-    }
-  </style>
+.envelope-wrap{
+  perspective:2000px;
+}
+
+.envelope{
+  width:min(86vw,330px);
+  height:600px;
+  background:#faf8f5;
+  border:1px solid #e7ded4;
+  position:relative;
+  overflow:hidden;
+  cursor:pointer;
+  box-shadow:
+    0 25px 80px rgba(0,0,0,.12),
+    0 8px 25px rgba(0,0,0,.06);
+}
+
+.envelope::before{
+  content:"";
+  position:absolute;
+  inset:18px;
+  border:1px solid #e7ded4;
+  z-index:5;
+}
+
+.flap{
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:140px;
+  background:#f8f5f1;
+  border-bottom:1px solid #e7ded4;
+  transform-origin:top;
+  transition:1.4s cubic-bezier(.22,1,.36,1);
+  z-index:10;
+}
+
+.flap::after{
+  content:"";
+  position:absolute;
+  left:50%;
+  bottom:-45px;
+  transform:translateX(-50%);
+  width:90px;
+  height:90px;
+  border-radius:50%;
+  background:#f8f5f1;
+  border:1px solid #e7ded4;
+}
+
+.envelope.open .flap{
+  transform:rotateX(-145deg);
+}
+
+.env-content{
+  height:100%;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:flex-start;
+  padding-top:35px;
+  position:relative;
+  z-index:20;
+}
+
+.date-big{
+  font-family:"Cormorant Garamond",serif;
+  font-size:76px;
+  line-height:.85;
+}
+
+.dot{
+  margin:12px 0;
+  color:#b79b69;
+}
+
+.invite-word{
+  margin-top:30px;
+  font-size:12px;
+  letter-spacing:.45em;
+}
+
+.heart{
+  margin-top:28px;
+  font-size:22px;
+}
+
+.tap{
+  margin-top:90px;
+  font-size:11px;
+  line-height:2;
+  letter-spacing:.45em;
+  text-align:center;
+}
+
+.arrow{
+  margin-top:22px;
+  color:#b79b69;
+  animation:bounce 2s infinite;
+}
+
+/* SITE */
+
+.site{
+  display:none;
+  opacity:0;
+  animation:siteIn 1.8s ease forwards;
+}
+
+.site.show{
+  display:block;
+}
+
+/* HERO */
+
+.hero{
+  min-height:100vh;
+  position:relative;
+  overflow:hidden;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  color:white;
+}
+
+.hero-image{
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(rgba(0,0,0,.58),rgba(0,0,0,.58)),
+    url("hero.jpg") center center/cover;
+  transform:scale(1.06);
+  animation:slowZoom 18s ease infinite alternate;
+}
+
+.hero::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(circle at center,transparent 20%,rgba(0,0,0,.35));
+}
+
+.hero-content{
+  position:relative;
+  z-index:5;
+  padding:20px;
+}
+
+.hero h1{
+  font-family:"Cormorant Garamond",serif;
+  font-size:clamp(58px,10vw,120px);
+  font-weight:400;
+  font-style:italic;
+  margin-bottom:28px;
+}
+
+.hero p{
+  max-width:680px;
+  margin:auto;
+  line-height:2;
+  font-size:18px;
+}
+
+.hero-date{
+  margin-top:34px;
+  letter-spacing:.5em;
+  font-size:12px;
+  opacity:.8;
+}
+
+/* DUST */
+
+.dust{
+  position:absolute;
+  inset:0;
+  overflow:hidden;
+}
+
+.dust span{
+  position:absolute;
+  width:2px;
+  height:2px;
+  border-radius:50%;
+  background:#d9b97b;
+  opacity:.4;
+  animation:float 8s linear infinite;
+}
+
+/* GENERAL */
+
+section{
+  padding:110px 24px;
+}
+
+.container{
+  max-width:1180px;
+  margin:auto;
+}
+
+.section-title{
+  text-align:center;
+  margin-bottom:70px;
+  letter-spacing:.4em;
+  font-size:12px;
+  color:#b89b67;
+}
+
+.grid-2{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:28px;
+}
+
+.grid-3{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:28px;
+}
+
+.card{
+  background:rgba(255,255,255,.55);
+  border:1px solid #e7ded4;
+  padding:50px 36px;
+  backdrop-filter:blur(12px);
+  box-shadow:
+    0 18px 55px rgba(0,0,0,.06);
+}
+
+.card h2,
+.card h3{
+  font-family:"Cormorant Garamond",serif;
+  font-size:42px;
+  font-weight:400;
+  margin-bottom:30px;
+}
+
+.family{
+  text-align:center;
+}
+
+.family p{
+  line-height:2.4;
+  font-size:17px;
+}
+
+.event p{
+  line-height:2;
+  margin-bottom:22px;
+}
+
+.label{
+  margin-bottom:10px;
+  letter-spacing:.35em;
+  font-size:11px;
+  color:#b89b67;
+}
+
+.map-btn{
+  display:inline-block;
+  margin-top:16px;
+  border:1px solid #1c1c1c;
+  color:#1c1c1c;
+  padding:14px 20px;
+  text-decoration:none;
+  font-size:11px;
+  letter-spacing:.25em;
+  transition:.4s;
+}
+
+.map-btn:hover{
+  background:#1c1c1c;
+  color:white;
+}
+
+/* PHOTO */
+
+.photo-wrap{
+  max-width:760px;
+  margin:auto;
+  background:white;
+  padding:14px;
+  border-radius:40px;
+  border:1px solid #e7ded4;
+  box-shadow:
+    0 24px 80px rgba(0,0,0,.1);
+}
+
+.photo{
+  height:720px;
+  border-radius:30px;
+  overflow:hidden;
+  position:relative;
+}
+
+.photo img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+/* COUNTDOWN */
+
+.countdown{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:18px;
+  margin-top:60px;
+}
+
+.count-box{
+  background:rgba(255,255,255,.55);
+  border:1px solid #e7ded4;
+  padding:34px 10px;
+  text-align:center;
+}
+
+.count-box strong{
+  display:block;
+  font-family:"Cormorant Garamond",serif;
+  font-size:56px;
+  font-weight:400;
+}
+
+.count-box span{
+  letter-spacing:.3em;
+  font-size:11px;
+}
+
+/* MUSIC */
+
+.music-btn{
+  position:fixed;
+  right:20px;
+  bottom:20px;
+  width:56px;
+  height:56px;
+  border-radius:50%;
+  border:1px solid #d8cab3;
+  background:rgba(255,255,255,.72);
+  backdrop-filter:blur(12px);
+  cursor:pointer;
+  z-index:100;
+  color:#b89b67;
+  font-size:18px;
+  box-shadow:0 10px 30px rgba(0,0,0,.08);
+}
+
+/* FOOTER */
+
+footer{
+  text-align:center;
+  padding:120px 20px;
+}
+
+.final-date{
+  font-family:"Cormorant Garamond",serif;
+  font-size:70px;
+}
+
+/* REVEAL */
+
+.reveal{
+  opacity:0;
+  transform:translateY(80px);
+  transition:1.2s ease;
+}
+
+.reveal.active{
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* ANIMATION */
+
+@keyframes bounce{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(10px)}
+}
+
+@keyframes siteIn{
+  from{
+    opacity:0;
+    filter:blur(14px);
+  }
+  to{
+    opacity:1;
+    filter:blur(0);
+  }
+}
+
+@keyframes float{
+  from{
+    transform:translateY(100vh);
+    opacity:0;
+  }
+  20%{
+    opacity:1;
+  }
+  to{
+    transform:translateY(-10vh);
+    opacity:0;
+  }
+}
+
+@keyframes slowZoom{
+  from{
+    transform:scale(1.06);
+  }
+  to{
+    transform:scale(1.12);
+  }
+}
+
+/* MOBILE */
+
+@media(max-width:900px){
+
+  section{
+    padding:90px 20px;
+  }
+
+  .grid-2,
+  .grid-3{
+    grid-template-columns:1fr;
+  }
+
+  .photo{
+    height:500px;
+  }
+
+  .countdown{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .hero h1{
+    font-size:72px;
+  }
+
+}
+
+@media(max-width:480px){
+
+  .hero h1{
+    font-size:56px;
+  }
+
+  .hero p{
+    font-size:15px;
+  }
+
+  .photo{
+    height:420px;
+  }
+
+  .count-box strong{
+    font-size:42px;
+  }
+
+}
+
+</style>
 </head>
 
 <body>
 
-  <button class="music" onclick="toggleMusic()">♫</button>
+<button class="music-btn" onclick="toggleMusic()">♫</button>
 
-  <audio id="music" loop>
-    <source src="music.mp3" type="audio/mpeg">
-  </audio>
+<audio id="music" loop>
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
 
-  <div class="dust" id="dust"></div>
+<!-- INTRO -->
 
-  <div class="intro" id="intro">
-    <div class="envelope-wrap">
-      <div class="envelope" id="envelope" onclick="openInvite()">
-        <div class="flap"></div>
+<div class="intro" id="intro">
 
-        <div class="env-content">
-          <div class="date-big">06</div>
-          <div class="dot">•</div>
-          <div class="date-big">06</div>
-          <div class="dot">•</div>
-          <div class="date-big">26</div>
+  <div class="envelope-wrap">
 
-          <div class="invite-word">DAVETLİSİNİZ</div>
-          <div class="heart">♥</div>
+    <div class="envelope" id="envelope" onclick="openInvitation()">
 
-          <div class="tap">
-            AÇMAK İÇİN<br>
-            DOKUNUN
-          </div>
+      <div class="flap"></div>
 
-          <div class="arrow">⌄</div>
+      <div class="env-content">
+
+        <div class="date-big">06</div>
+        <div class="dot">•</div>
+
+        <div class="date-big">06</div>
+        <div class="dot">•</div>
+
+        <div class="date-big">26</div>
+
+        <div class="invite-word">
+          DAVETLİSİNİZ
         </div>
+
+        <div class="heart">♥</div>
+
+        <div class="tap">
+          AÇMAK İÇİN<br>
+          DOKUNUN
+        </div>
+
+        <div class="arrow">⌄</div>
+
       </div>
+
     </div>
+
   </div>
 
-  <main class="site" id="site">
+</div>
 
-    <section class="hero">
-      <div class="bg-date">06 06 26</div>
-      <div>
-        <h1>Zeynep & Batuhan</h1>
-        <p>
-          Bu anlamlı günde sizleri de aramızda görmekten mutluluk duyarız.
-        </p>
-        <div style="margin-top:36px;font-size:28px" class="gold">♥</div>
+<!-- SITE -->
+
+<main class="site" id="site">
+
+  <!-- HERO -->
+
+  <section class="hero">
+
+    <div class="hero-image"></div>
+
+    <div class="dust" id="dust"></div>
+
+    <div class="hero-content">
+
+      <h1>Zeynep & Batuhan</h1>
+
+      <p>
+        Bu anlamlı günde sizleri de aramızda görmekten mutluluk duyarız.
+      </p>
+
+      <div class="hero-date">
+        06 • 06 • 2026
       </div>
-    </section>
 
-    <section class="reveal">
-      <div class="container grid-2">
-        <div class="card">
+    </div>
+
+  </section>
+
+  <!-- FAMILY -->
+
+  <section class="reveal">
+
+    <div class="container">
+
+      <div class="section-title">
+        AİLELERİMİZ
+      </div>
+
+      <div class="grid-2">
+
+        <div class="card family">
           <h2>Özbölük Ailesi</h2>
-          <p class="spaced">FİLİZ & NURETTİN</p>
+
+          <p>
+            Filiz<br>
+            &<br>
+            Nurettin
+          </p>
         </div>
 
-        <div class="card">
+        <div class="card family">
           <h2>Yazıcı Ailesi</h2>
-          <p class="spaced">MELİKE & SELAHATTİN</p>
-        </div>
-      </div>
-    </section>
 
-    <section class="reveal">
-      <div class="container grid-3">
+          <p>
+            Melike<br>
+            &<br>
+            Selahattin
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- EVENTS -->
+
+  <section class="reveal">
+
+    <div class="container">
+
+      <div class="grid-3">
 
         <div class="card event">
+
           <h3>Kına</h3>
+
           <div class="label">TARİH</div>
           <p>04.06.2026 Perşembe</p>
 
           <div class="label">SAAT</div>
           <p>19:00</p>
 
-          <div class="label">YER</div>
+          <div class="label">KONUM</div>
+
           <p>
             Elitnaz Düğün Salonu<br>
             Mahmut Şevket Paşa Mah.<br>
@@ -442,166 +674,221 @@
             Okmeydanı
           </p>
 
-          <a class="map-btn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Elitnaz%20D%C3%BC%C4%9F%C3%BCn%20Salonu%20Mahmut%20%C5%9Eevket%20Pa%C5%9Fa%20Mah.%20Kuru%C3%A7ay%20Cad.%20No%2010%20Okmeydan%C4%B1">
+          <a class="map-btn" target="_blank"
+          href="https://maps.google.com/?q=Elitnaz+Düğün+Salonu">
             HARİTADA AÇ
           </a>
+
         </div>
 
         <div class="card event">
+
           <h3>Gelin Alma</h3>
+
           <div class="label">TARİH</div>
           <p>06.06.2026 Cumartesi</p>
 
           <div class="label">SAAT</div>
           <p>11:00</p>
 
-          <div class="label">BİLGİ</div>
-          <p>Gelin alma saat 11:00’de olacaktır.</p>
         </div>
 
         <div class="card event">
+
           <h3>Nikah</h3>
+
           <div class="label">TARİH</div>
           <p>06.06.2026 Cumartesi</p>
 
           <div class="label">SAAT</div>
           <p>13:30</p>
 
-          <div class="label">YER</div>
+          <div class="label">KONUM</div>
+
           <p>
             Karadeniz Salonu<br>
             Zeytinburnu Nikah Dairesi<br>
-            Kazlıçeşme, Abay Cd. No:165<br>
+            Kazlıçeşme Abay Cd. No:165<br>
             Zeytinburnu / İstanbul
           </p>
 
-          <a class="map-btn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Karadeniz%20Salonu%20Zeytinburnu%20Nikah%20Dairesi%20Kazl%C4%B1%C3%A7e%C5%9Fme%20Abay%20Cd.%20No%20165%20Zeytinburnu%20%C4%B0stanbul">
+          <a class="map-btn" target="_blank"
+          href="https://maps.google.com/?q=Zeytinburnu+Nikah+Dairesi">
             HARİTADA AÇ
           </a>
+
         </div>
 
       </div>
-    </section>
 
-    <section class="reveal">
-      <div class="container" style="text-align:center">
-        <h2 style="font-family:'Cormorant Garamond',serif;font-size:56px;font-weight:400">
-          Düğüne Kalan Süre
-        </h2>
+    </div>
 
-        <div class="countdown">
-          <div class="count-box">
-            <strong id="days">0</strong>
-            <span>GÜN</span>
-          </div>
-          <div class="count-box">
-            <strong id="hours">0</strong>
-            <span>SAAT</span>
-          </div>
-          <div class="count-box">
-            <strong id="minutes">0</strong>
-            <span>DAKİKA</span>
-          </div>
-          <div class="count-box">
-            <strong id="seconds">0</strong>
-            <span>SANİYE</span>
-          </div>
-        </div>
+  </section>
+
+  <!-- COUNTDOWN -->
+
+  <section class="reveal">
+
+    <div class="container">
+
+      <div class="section-title">
+        DÜĞÜNE KALAN SÜRE
       </div>
-    </section>
 
-    <section class="reveal">
-      <div class="photo-frame">
-        <div class="photo">
-          Fotoğrafınızı buraya ekleyin
+      <div class="countdown">
+
+        <div class="count-box">
+          <strong id="days">0</strong>
+          <span>GÜN</span>
         </div>
+
+        <div class="count-box">
+          <strong id="hours">0</strong>
+          <span>SAAT</span>
+        </div>
+
+        <div class="count-box">
+          <strong id="minutes">0</strong>
+          <span>DAKİKA</span>
+        </div>
+
+        <div class="count-box">
+          <strong id="seconds">0</strong>
+          <span>SANİYE</span>
+        </div>
+
       </div>
-    </section>
 
-    <section class="reveal" style="text-align:center">
-      <a class="share-btn" target="_blank" href="https://wa.me/?text=Zeynep%20%26%20Batuhan%20davetiyesi">
-        WHATSAPP İLE PAYLAŞ
-      </a>
-    </section>
+    </div>
 
-    <footer>
-      <div class="final-date">06 . 06 . 26</div>
-      <p class="spaced" style="margin-top:24px">
-        BİRLİKTE YENİ BİR HAYAT
-      </p>
-      <div style="margin-top:28px;color:#b99b61;font-size:24px">♥</div>
-    </footer>
+  </section>
 
-  </main>
+  <!-- PHOTO -->
 
-  <script>
-    const envelope = document.getElementById("envelope");
-    const intro = document.getElementById("intro");
-    const site = document.getElementById("site");
+  <section class="reveal">
 
-    function openInvite(){
-      envelope.classList.add("open");
+    <div class="photo-wrap">
 
-      setTimeout(() => {
-        intro.classList.add("hide");
-      }, 700);
+      <div class="photo">
 
-      setTimeout(() => {
-        intro.style.display = "none";
-        site.classList.add("show");
-        window.scrollTo(0,0);
-      }, 1700);
+        <img src="couple.jpg" alt="photo">
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- FOOTER -->
+
+  <footer>
+
+    <div class="final-date">
+      06 • 06 • 26
+    </div>
+
+  </footer>
+
+</main>
+
+<script>
+
+const intro = document.getElementById("intro");
+const envelope = document.getElementById("envelope");
+const site = document.getElementById("site");
+
+function openInvitation(){
+
+  envelope.classList.add("open");
+
+  setTimeout(() => {
+    intro.classList.add("hide");
+  },700);
+
+  setTimeout(() => {
+    intro.style.display = "none";
+    site.classList.add("show");
+    window.scrollTo(0,0);
+  },1800);
+
+}
+
+/* COUNTDOWN */
+
+const targetDate = new Date("2026-06-06T13:30:00").getTime();
+
+function countdown(){
+
+  const now = new Date().getTime();
+
+  const distance = targetDate - now;
+
+  document.getElementById("days").innerText =
+    Math.floor(distance / (1000*60*60*24));
+
+  document.getElementById("hours").innerText =
+    Math.floor((distance % (1000*60*60*24)) / (1000*60*60));
+
+  document.getElementById("minutes").innerText =
+    Math.floor((distance % (1000*60*60)) / (1000*60));
+
+  document.getElementById("seconds").innerText =
+    Math.floor((distance % (1000*60)) / 1000);
+
+}
+
+setInterval(countdown,1000);
+
+/* REVEAL */
+
+const reveals = document.querySelectorAll(".reveal");
+
+const observer = new IntersectionObserver(entries => {
+
+  entries.forEach(entry => {
+
+    if(entry.isIntersecting){
+      entry.target.classList.add("active");
     }
 
-    function toggleMusic(){
-      const music = document.getElementById("music");
-      if(music.paused){
-        music.play();
-      }else{
-        music.pause();
-      }
-    }
+  });
 
-    const weddingDate = new Date("2026-06-06T13:30:00").getTime();
+},{threshold:.15});
 
-    function updateCountdown(){
-      const now = new Date().getTime();
-      const diff = weddingDate - now;
+reveals.forEach(r => observer.observe(r));
 
-      if(diff <= 0) return;
+/* DUST */
 
-      document.getElementById("days").innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
-      document.getElementById("hours").innerText = Math.floor((diff / (1000 * 60 * 60)) % 24);
-      document.getElementById("minutes").innerText = Math.floor((diff / (1000 * 60)) % 60);
-      document.getElementById("seconds").innerText = Math.floor((diff / 1000) % 60);
-    }
+const dust = document.getElementById("dust");
 
-    setInterval(updateCountdown,1000);
-    updateCountdown();
+for(let i=0;i<40;i++){
 
-    const reveals = document.querySelectorAll(".reveal");
+  const particle = document.createElement("span");
 
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if(entry.isIntersecting){
-          entry.target.classList.add("visible");
-        }
-      });
-    },{threshold:.16});
+  particle.style.left = Math.random()*100+"vw";
+  particle.style.top = Math.random()*100+"vh";
+  particle.style.animationDelay = Math.random()*8+"s";
+  particle.style.animationDuration = 6+Math.random()*10+"s";
 
-    reveals.forEach(el => observer.observe(el));
+  dust.appendChild(particle);
 
-    const dust = document.getElementById("dust");
+}
 
-    for(let i=0;i<35;i++){
-      const p = document.createElement("span");
-      p.style.left = Math.random() * 100 + "vw";
-      p.style.animationDelay = Math.random() * 8 + "s";
-      p.style.animationDuration = 6 + Math.random() * 8 + "s";
-      p.style.opacity = Math.random();
-      dust.appendChild(p);
-    }
-  </script>
+/* MUSIC */
+
+function toggleMusic(){
+
+  const music = document.getElementById("music");
+
+  if(music.paused){
+    music.play();
+  }else{
+    music.pause();
+  }
+
+}
+
+</script>
 
 </body>
 </html>
